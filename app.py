@@ -122,16 +122,22 @@ shares_to_buy = int(capital // latest_price)
 max_risk = abs(latest_price - stop_loss_buy) * shares_to_buy if shares_to_buy > 0 else 0
 max_reward = abs(target_buy - latest_price) * shares_to_buy if shares_to_buy > 0 else 0
 
-# 100% Indian Standard Time (IST) Offset System
+# --- SMART MULTI-MARKET LIVE STATUS ENGINE ---
 utc_now = datetime.datetime.utcnow()
-# India UTC se 5 ghante 30 minute aage hai
 ist_now = utc_now + datetime.timedelta(hours=5, minutes=30)
 
 market_open = False
-# Monday to Friday (0 se 4) aur Bharat ka trading samay 9:15 se 15:30
-if ist_now.weekday() < 5 and (9, 15) <= (ist_now.hour, ist_now.minute) <= (15, 30):
-    market_open = True
+current_time_val = (ist_now.hour, ist_now.minute)
 
+# Agar asset Indian market ka hai (.NS ya Nifty Index)
+if ".ns" in ticker.lower() or "^nsei" in ticker.lower():
+    if ist_now.weekday() < 5 and (9, 15) <= current_time_val <= (15, 30):
+        market_open = True
+# Agar asset US Market ka hai (Tesla ya Apple - Raat 8:00 PM se Raat 2:30 AM IST)
+elif ticker.lower() in ["tsla", "aapl"]:
+    # US Market Monday to Friday chalta hai (Indian time ke hisab se Mon night se Sat early morning)
+    if ist_now.weekday() < 6 and ((20, 0) <= current_time_val <= (23, 59) or (0, 0) <= current_time_val <= (2, 30)):
+        market_open = True
 
 if market_open:
     st.sidebar.success("🟢 MARKET IS LIVE")
