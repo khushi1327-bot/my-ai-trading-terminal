@@ -102,7 +102,8 @@ simulated_profit = (sahi_trades * 1.5) - ((total_trades - sahi_trades) * 1.0)
 
 last_row = X[[-1]]
 tomorrow_prob_matrix = model.predict_proba(last_row)
-tomorrow_prob = float(tomorrow_prob_matrix)
+tomorrow_prob = float(tomorrow_prob_matrix[0][1])
+
 
 latest_data = df.iloc[-1]
 latest_price = float(latest_data['Close'])
