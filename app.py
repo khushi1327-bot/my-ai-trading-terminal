@@ -122,11 +122,16 @@ shares_to_buy = int(capital // latest_price)
 max_risk = abs(latest_price - stop_loss_buy) * shares_to_buy if shares_to_buy > 0 else 0
 max_reward = abs(target_buy - latest_price) * shares_to_buy if shares_to_buy > 0 else 0
 
-# True Status Control Node
-now = datetime.datetime.now()
+# 100% Indian Standard Time (IST) Offset System
+utc_now = datetime.datetime.utcnow()
+# India UTC se 5 ghante 30 minute aage hai
+ist_now = utc_now + datetime.timedelta(hours=5, minutes=30)
+
 market_open = False
-if now.weekday() < 5 and (9, 15) <= (now.hour, now.minute) <= (15, 30):
+# Monday to Friday (0 se 4) aur Bharat ka trading samay 9:15 se 15:30
+if ist_now.weekday() < 5 and (9, 15) <= (ist_now.hour, ist_now.minute) <= (15, 30):
     market_open = True
+
 
 if market_open:
     st.sidebar.success("🟢 MARKET IS LIVE")
