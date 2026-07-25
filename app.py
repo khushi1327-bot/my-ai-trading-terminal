@@ -16,14 +16,17 @@ st.write("Professional algorithmic dashboard utilizing 100% genuine market data 
 COMPANY_DICT = {
     "Reliance Industries (NSE)": "RELIANCE.NS",
     "Tata Consultancy Services (TCS)": "TCS.NS",
+    "Tata Motors (NSE)": "TATAMOTORS.NS",
     "State Bank of India (SBI)": "SBIN.NS",
     "HDFC Bank (NSE)": "HDFCBANK.NS",
     "Infosys (NSE)": "INFY.NS",
+    "Wipro Limited (NSE)": "WIPRO.NS",
     "Nifty 50 Index (Market Benchmark)": "^NSEI",
     "Gold ETF India (GOLDBEES)": "GOLDBEES.NS",
     "Tesla Inc. (US Market)": "TSLA",
     "Apple Inc. (US Market)": "AAPL"
 }
+
 
 st.sidebar.header("🎛️ Live Market Controls")
 selected_company = st.sidebar.selectbox("🏢 Select Real Asset", list(COMPANY_DICT.keys()))
