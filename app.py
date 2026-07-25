@@ -148,11 +148,13 @@ else:
     st.sidebar.warning("📊 MARKET IS CLOSED (Showing Last Session Data)")
 
 if tomorrow_prob > 0.55 and latest_rsi < 62 and latest_ma10 > latest_ma50:
-    trade_signal, signal_color = "🟢 STRONG KHARIDO (Tezi Ka Sanket)", "success"
-    signal_desc = f"Indicators aur Price Action ke hisab se agle session me **TEZI** confirm ho rahi hai. **Current Price:** ₹{latest_price:.2f}"
+    trade_signal, signal_color = "🟢 BULLISH SIGNAL (Tezi Ka Trend)", "success"
+    signal_desc = f"Technical Indicators aur Price Action data ek **Bullish Structure** dikha rahe hain. **Current Price:** ₹{latest_price:.2f}"
+
 elif tomorrow_prob < 0.45 or latest_rsi > 70 or latest_ma10 < latest_ma50:
-    trade_signal, signal_color = "🔴 STRONG BECHO (Mandi Ka Sanket)", "error"
-    signal_desc = f"Indicators aur Technical Volatility ke hisab se agle session me **MANDI** confirm kar rahe hain. **Current Price:** ₹{latest_price:.2f}"
+    trade_signal, signal_color = "🔴 BEARISH SIGNAL (Mandi Ka Trend)", "error"
+    signal_desc = f"Technical Indicators aur Volatility data ek **Bearish Trend** ka sanket de rahe hain. **Current Price:** ₹{latest_price:.2f}"
+
 else:
     trade_signal, signal_color = "⚪ RUKO / HOLD (Neutral Market)", "info"
     signal_desc = "Bazaar abhi sidewise range mein hai. Real-trading rules ke hisab se abhi trade lena risky hai."
