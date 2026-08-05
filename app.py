@@ -105,9 +105,10 @@ sahi_trades = np.sum(test_preds == y_test)
 win_rate = (sahi_trades / total_trades) * 100
 simulated_profit = (sahi_trades * 1.5) - ((total_trades - sahi_trades) * 1.0)
 
-last_row = X[[-1]]
+last_row = X[-1].reshape(1, -1)
 tomorrow_prob_matrix = model.predict_proba(last_row)
-tomorrow_prob = float(tomorrow_prob_matrix[0][1])
+tomorrow_prob = float(tomorrow_prob_matrix.flatten()[1])
+
 
 
 latest_data = df.iloc[-1]
